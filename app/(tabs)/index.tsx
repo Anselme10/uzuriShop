@@ -1,75 +1,147 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Colors } from "@/constants/Colors";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Image } from "expo-image";
+import { Link } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <ScrollView contentContainerStyle={styles.container}>
+      <StatusBar style="light" backgroundColor={Colors.primary} />
+      <Image
+        style={{ width: 150, height: 100, marginHorizontal: 20 }}
+        source={require("@/assets/images/uzlogotrans.png")}
+      />
+      <Link href={"/BrandCreationForm"} asChild>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.iconLabel}>
+            <Ionicons
+              name="add-circle-outline"
+              size={22}
+              color="#fff"
+              style={styles.icon}
+            />
+            <Text style={styles.text}>CRÉER MA MARQUE</Text>
+          </View>
+        </TouchableOpacity>
+      </Link>
+
+      <Link href={"/CoachingScreen"} asChild>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.iconLabel}>
+            <FontAwesome5
+              name="chalkboard-teacher"
+              size={22}
+              color="#fff"
+              style={styles.icon}
+            />
+            <Text style={styles.text}>COACHING ET FORMATIONS</Text>
+          </View>
+        </TouchableOpacity>
+      </Link>
+      <Link href={"/Ambassador"} asChild>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.iconLabel}>
+            <FontAwesome5
+              name="chalkboard-teacher"
+              size={22}
+              color="#fff"
+              style={styles.icon}
+            />
+            <Text style={styles.text}>AMBASSADOR/DISTRIBUTEUR</Text>
+          </View>
+        </TouchableOpacity>
+      </Link>
+
+      <Link href={"/EcommeScreen"} asChild>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.iconLabel}>
+            <Ionicons
+              name="bag-outline"
+              size={22}
+              color="#fff"
+              style={styles.icon}
+            />
+            <Text style={styles.text}>ACHETER DES PRODUITS UZURI</Text>
+          </View>
+        </TouchableOpacity>
+      </Link>
+
+      <Link href={"/InspirationConseils"} asChild>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.iconLabel}>
+            <Ionicons
+              name="newspaper-outline"
+              size={22}
+              color="#fff"
+              style={styles.icon}
+            />
+            <Text style={styles.text}>LASH MAGAZINE</Text>
+          </View>
+        </TouchableOpacity>
+      </Link>
+
+      <Link href={"/CommandesScreen"} asChild>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.iconLabel}>
+            <FontAwesome5
+              name="clipboard-list"
+              size={22}
+              color="#fff"
+              style={styles.icon}
+            />
+            <Text style={styles.text}>SUIVRE MES DEMANDES</Text>
+          </View>
+        </TouchableOpacity>
+      </Link>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    paddingVertical: 50,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    backgroundColor: "#fce8ea",
+    justifyContent: "center",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: Colors.primary, // rose doux
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 18,
+    marginBottom: 20,
+    width: "100%",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 4,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  iconLabel: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    marginRight: 10,
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: "800",
+    color: Colors.white, // brun foncé
+    textAlign: "center",
   },
 });

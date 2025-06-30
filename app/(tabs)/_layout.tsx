@@ -1,43 +1,67 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import { firestore } from "@/backend/firebase";
+import { TabBar } from "@/components/TabBar";
+import { Tabs } from "expo-router";
+import { collection, onSnapshot } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+//import { useAuth } from "../context/AuthContext";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const { user, loading } = useAuth();
+  const [cartItemCount, setCartItemCount] = useState(0);
+
+  // Listen to cart items count changes
+  useEffect(() => {
+    if (!user?.uid) {
+      setCartItemCount(0);
+      return;
+    }
+
+    const cartRef = collection(firestore, "carts", user.uid, "items");
+    const unsubscribe = onSnapshot(cartRef, (snapshot) => {
+      setCartItemCount(snapshot.size); // Update count based on number of documents
+    });
+
+    return () => unsubscribe(); // Clean up listener
+  }, [user?.uid]);
+
+  // 🚨 Redirect to root if user is not logged in
+  // useEffect(() => {
+  //   if (!loading && !user) {
+  //     router.replace("/");
+  //   }
+  // }, [user, loading]);
 
   return (
     <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+      tabBar={(props) => <TabBar {...props} />}
+      screenOptions={{ headerShown: false }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Home",
+        }}
+      />
+
+      <Tabs.Screen
+        name="cart"
+        options={{
+          title: "Cart",
+          tabBarBadge: cartItemCount > 0 ? cartItemCount : undefined,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="notifications"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Notification",
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
         }}
       />
     </Tabs>

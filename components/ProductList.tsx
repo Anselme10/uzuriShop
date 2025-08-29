@@ -1,8 +1,8 @@
 // components/ProductList.tsx
-import { FlatList, StyleSheet, View } from "react-native";
-import React from "react";
-import ProductItem from "./ProductItem";
 import { ProductType } from "@/types/type";
+import React from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import ProductItem from "./ProductItem";
 
 interface ProductListProps {
   products: ProductType[];

@@ -17,7 +17,6 @@ import Animated, {
   FadeIn,
   FadeInDown,
   FadeInUp,
-  SlideInLeft,
   SlideInRight,
   ZoomIn,
   interpolate,
@@ -158,7 +157,14 @@ const MoodBoardDetail = () => {
 
           <Animated.View style={[styles.imageContainer, imageStyle]}>
             <Image
-              source={{ uri: images.length > 0 ? images[0] : fallbackImage }}
+              source={{
+                uri:
+                  images.length > 0
+                    ? `https://firebasestorage.googleapis.com/v0/b/uzuri-de01c.firebasestorage.app/o/${encodeURIComponent(
+                        images[0]
+                      )}?alt=media`
+                    : fallbackImage,
+              }}
               style={styles.mainImage}
               resizeMode="cover"
               defaultSource={{ uri: fallbackImage }}
@@ -233,7 +239,12 @@ const MoodBoardDetail = () => {
                     entering={ZoomIn.duration(600).delay(800 + index * 100)}
                   >
                     <Image
-                      source={{ uri: image || fallbackImage }}
+                      source={{
+                        uri:
+                          `https://firebasestorage.googleapis.com/v0/b/uzuri-de01c.firebasestorage.app/o/${encodeURIComponent(
+                            image
+                          )}?alt=media` || fallbackImage,
+                      }}
                       style={styles.galleryImage}
                       resizeMode="cover"
                       defaultSource={{ uri: fallbackImage }}
@@ -256,18 +267,18 @@ const MoodBoardDetail = () => {
             </Animated.Text>
           )}
 
-          <Animated.Text
+          {/* <Animated.Text
             style={styles.sectionTitle}
             entering={FadeIn.duration(600).delay(900 + images.length * 100)}
           >
             Key Elements
-          </Animated.Text>
+          </Animated.Text> */}
 
           <Animated.View
             style={styles.elementsContainer}
             entering={FadeInUp.duration(800).delay(1000 + images.length * 100)}
           >
-            {["Color Palette", "Typography", "Textures", "Composition"].map(
+            {/* {["Color Palette", "Typography", "Textures", "Composition"].map(
               (item, index) => (
                 <Animated.View
                   key={item}
@@ -297,14 +308,14 @@ const MoodBoardDetail = () => {
                   <Text style={styles.elementText}>{item}</Text>
                 </Animated.View>
               )
-            )}
+            )} */}
           </Animated.View>
 
           <Animated.Text
             style={styles.sectionTitle}
             entering={FadeIn.duration(600).delay(1400 + images.length * 100)}
           >
-            Moodboard Details
+            Details Moodboard
           </Animated.Text>
 
           <Animated.View
@@ -312,11 +323,11 @@ const MoodBoardDetail = () => {
             entering={FadeInUp.duration(800).delay(1500 + images.length * 100)}
           >
             <Text style={styles.detailsText}>
-              This {style.toLowerCase()} moodboard is designed to inspire your
-              next collection. The color scheme and textures create a{" "}
-              {style.toLowerCase()} aesthetic that&apos;s perfect for luxury
-              beauty products. Use these elements as a starting point for your
-              brand identity, packaging design, and marketing materials.
+              This {style.toLowerCase()} Ce moodboard est conçu pour inspirer
+              votre prochaine collection. La palette de couleurs et les textures
+              créent une esthétique idéale pour les produits de beauté de luxe.
+              Utilisez ces éléments comme point de départ pour votre identité de
+              marque, votre packaging et vos supports marketing.
             </Text>
 
             <View style={styles.tagsContainer}>

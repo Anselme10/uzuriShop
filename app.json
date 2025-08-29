@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Uzuri Shop",
+    "name": "MY UZURI",
     "slug": "Uzuri-shop",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "uzurishop",

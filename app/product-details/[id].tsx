@@ -22,11 +22,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Animated, {
-  FadeInDown,
-  FadeInRight,
-  FadeInUp,
-} from "react-native-reanimated";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { useAuth } from "../context/AuthContext";
 
 const ProductDetails = () => {
@@ -39,6 +35,7 @@ const ProductDetails = () => {
 
   // Convert id to string if it's an array
   const productId = Array.isArray(id) ? id[0] : id;
+  //console.log("Id is ", productId);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -156,7 +153,7 @@ const ProductDetails = () => {
     <>
       <Stack.Screen
         options={{
-          title: "Product Details",
+          title: "Détails du Produit",
           headerTransparent: true,
           headerRight: () => (
             <TouchableOpacity onPress={() => router.push("/cart")}>
@@ -170,7 +167,7 @@ const ProductDetails = () => {
           <ImageSlider imageList={product.images} />
         </Animated.View>
         <View style={styles.container}>
-          <Animated.View
+          {/* <Animated.View
             entering={FadeInRight.delay(500).duration(300).springify()}
             style={styles.ratingWrapper}
           >
@@ -183,14 +180,14 @@ const ProductDetails = () => {
             <TouchableOpacity>
               <Ionicons name="heart-outline" size={20} color={Colors.black} />
             </TouchableOpacity>
-          </Animated.View>
+          </Animated.View> */}
           <Text style={styles.title}>{product.title}</Text>
           <View style={styles.priceWraper}>
             <Text style={styles.price}>${product.price}</Text>
-            <View style={styles.priceDiscount}>
+            {/* <View style={styles.priceDiscount}>
               <Text style={styles.priceDiscountText}>6% Off</Text>
             </View>
-            <Text style={styles.oldPrice}>{product.price + 2}</Text>
+            <Text style={styles.oldPrice}>{product.price + 2}</Text> */}
           </View>
           <Animated.View
             entering={FadeInUp.delay(1100).duration(500).springify()}

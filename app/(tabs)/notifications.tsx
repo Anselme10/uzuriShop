@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     marginBottom: 12,
-    shadowColor: "#000",
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
     shadowOpacity: 0.05,
     shadowRadius: 8,
     elevation: 2,

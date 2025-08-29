@@ -164,7 +164,11 @@ const CommandesScreen = () => {
           {item.items.map((product, index) => (
             <View key={index} style={styles.productItem}>
               <Image
-                source={{ uri: product.image }}
+                source={{
+                  uri: `https://firebasestorage.googleapis.com/v0/b/uzuri-de01c.firebasestorage.app/o/${encodeURIComponent(
+                    product.image
+                  )}?alt=media`,
+                }}
                 style={styles.productImage}
               />
               <View style={styles.productInfo}>
@@ -373,7 +377,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 16,
     padding: 16,
-    shadowColor: "#000",
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 4,

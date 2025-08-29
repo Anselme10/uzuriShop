@@ -1,12 +1,13 @@
 import { Colors } from "@/constants/Colors";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useEffect, useState } from "react";
-import { LayoutChangeEvent, StyleSheet, View } from "react-native";
+import { LayoutChangeEvent, Platform, StyleSheet, View } from "react-native";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TabBarButton from "./TabBarButton";
 
 type Props = BottomTabBarProps;
@@ -14,6 +15,7 @@ type Props = BottomTabBarProps;
 export function TabBar({ state, descriptors, navigation }: Props) {
   const [dimension, setDimension] = useState({ height: 20, width: 100 });
   const tabPositionX = useSharedValue(0);
+  const insets = useSafeAreaInsets(); // ✅ Safe area insets
   const buttonWidth = dimension.width / state.routes.length;
 
   const onTabBarLayout = (e: LayoutChangeEvent) => {
@@ -69,7 +71,20 @@ export function TabBar({ state, descriptors, navigation }: Props) {
   };
 
   return (
-    <View onLayout={onTabBarLayout} style={styles.tabBar}>
+    <View
+      onLayout={onTabBarLayout}
+      style={[
+        styles.tabBar,
+        {
+          paddingBottom:
+            insets.bottom > 0
+              ? insets.bottom
+              : Platform.OS === "android"
+              ? 8
+              : 0,
+        },
+      ]}
+    >
       <Animated.View
         style={[styles.indicator, animatedStyle, { width: buttonWidth / 2 }]}
       />
@@ -83,8 +98,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingTop: 16,
     backgroundColor: Colors.white,
-    elevation: 8, // Add shadow on Android
-    shadowColor: "#000", // Add shadow on iOS
+    elevation: 8,
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,

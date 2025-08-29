@@ -256,7 +256,7 @@ const ProTipDetail = () => {
             style={styles.tipContentContainer}
             entering={FadeIn.duration(600).delay(600)}
           >
-            <Text style={styles.sectionTitle}>Pro Tip</Text>
+            <Text style={styles.sectionTitle}>Astuces</Text>
             <Text style={styles.tipContentText}>
               {content}
               {/* {"\n\n"}Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -309,7 +309,7 @@ const ProTipDetail = () => {
             style={styles.keyPointsContainer}
             entering={FadeIn.duration(600).delay(800)}
           >
-            <Text style={styles.sectionTitle}>Key Points</Text>
+            <Text style={styles.sectionTitle}>Points Clés</Text>
 
             {keyPoints.length > 0 ? (
               keyPoints.map((point, index) => (

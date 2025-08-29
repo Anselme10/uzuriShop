@@ -3,7 +3,6 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import {
   ScrollView,
   StyleSheet,
@@ -15,7 +14,6 @@ import {
 export default function HomeScreen() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <StatusBar style="light" backgroundColor={Colors.primary} />
       <Image
         style={{ width: 150, height: 100, marginHorizontal: 20 }}
         source={require("@/assets/images/uzlogotrans.png")}
@@ -37,8 +35,8 @@ export default function HomeScreen() {
       <Link href={"/CoachingScreen"} asChild>
         <TouchableOpacity style={styles.button}>
           <View style={styles.iconLabel}>
-            <FontAwesome5
-              name="chalkboard-teacher"
+            <Ionicons
+              name="add-circle-outline"
               size={22}
               color="#fff"
               style={styles.icon}
@@ -50,13 +48,13 @@ export default function HomeScreen() {
       <Link href={"/Ambassador"} asChild>
         <TouchableOpacity style={styles.button}>
           <View style={styles.iconLabel}>
-            <FontAwesome5
-              name="chalkboard-teacher"
+            <Ionicons
+              name="add-circle-outline"
               size={22}
               color="#fff"
               style={styles.icon}
             />
-            <Text style={styles.text}>AMBASSADOR/DISTRIBUTEUR</Text>
+            <Text style={styles.text}>REJOINDRE LA TEAM UZURI</Text>
           </View>
         </TouchableOpacity>
       </Link>
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     marginBottom: 20,
     width: "100%",
-    shadowColor: "#000",
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
     shadowOpacity: 0.1,
     shadowRadius: 6,
     shadowOffset: { width: 0, height: 3 },

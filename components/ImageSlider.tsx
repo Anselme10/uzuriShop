@@ -1,13 +1,12 @@
+import React, { useRef, useState } from "react";
 import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  Image,
   Dimensions,
+  FlatList,
+  Image,
+  StyleSheet,
+  View,
   ViewToken,
 } from "react-native";
-import React, { useRef, useState } from "react";
 import Pagination from "./Pagination";
 
 type Props = {
@@ -52,7 +51,11 @@ const ImageSlider = ({ imageList }: Props) => {
             }}
           >
             <Image
-              source={{ uri: item }}
+              source={{
+                uri: `https://firebasestorage.googleapis.com/v0/b/uzuri-de01c.firebasestorage.app/o/${encodeURIComponent(
+                  item
+                )}?alt=media`,
+              }}
               style={{ width: 300, height: 300, borderRadius: 8 }}
             />
           </View>

@@ -126,7 +126,7 @@ const Amb = () => {
 
         {/* Section 1: Personal Information */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>1. Personal Information</Text>
+          <Text style={styles.sectionTitle}>1. Informations Personelles</Text>
 
           <Controller
             control={control}
@@ -223,7 +223,7 @@ const Amb = () => {
 
         {/* Section 2: Social Media Information */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>2. Social Media Information</Text>
+          <Text style={styles.sectionTitle}>2. Vos réseaux sociaux</Text>
 
           <Controller
             control={control}
@@ -403,7 +403,7 @@ const Amb = () => {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                label="Explain your motivation"
+                label="Quelles sont vos motivations?"
                 mode="outlined"
                 style={[styles.input, { height: 100 }]}
                 onBlur={onBlur}

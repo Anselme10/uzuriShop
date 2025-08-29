@@ -196,6 +196,7 @@ const BrandCreationForm = () => {
             onChangeText={(text) =>
               setFormData({ ...formData, fullName: text })
             }
+            placeholderTextColor="#999"
           />
           <TextInput
             style={styles.input}
@@ -203,6 +204,7 @@ const BrandCreationForm = () => {
             value={formData.phone}
             onChangeText={(text) => setFormData({ ...formData, phone: text })}
             keyboardType="phone-pad"
+            placeholderTextColor="#999"
           />
           <TextInput
             style={styles.input}
@@ -210,11 +212,13 @@ const BrandCreationForm = () => {
             value={formData.email}
             onChangeText={(text) => setFormData({ ...formData, email: text })}
             keyboardType="email-address"
+            placeholderTextColor="#999"
           />
           <TextInput
             style={styles.input}
             placeholder="Nom de marque souhaité (optionnel)"
             value={formData.brandName}
+            placeholderTextColor="#999"
             onChangeText={(text) =>
               setFormData({ ...formData, brandName: text })
             }
@@ -281,6 +285,7 @@ const BrandCreationForm = () => {
             placeholder="Couleurs préférées"
             value={formData.colors}
             onChangeText={(text) => setFormData({ ...formData, colors: text })}
+            placeholderTextColor="#999"
           />
 
           {/* Quantity */}
@@ -312,6 +317,7 @@ const BrandCreationForm = () => {
             value={formData.budget}
             onChangeText={(text) => setFormData({ ...formData, budget: text })}
             keyboardType="numeric"
+            placeholderTextColor="#999"
           />
 
           {/* Delivery */}
@@ -321,6 +327,7 @@ const BrandCreationForm = () => {
           <TextInput
             style={styles.input}
             placeholder="Délai de livraison"
+            placeholderTextColor="#999"
             value={formData.deliveryTime}
             onChangeText={(text) =>
               setFormData({ ...formData, deliveryTime: text })
@@ -382,6 +389,7 @@ const BrandCreationForm = () => {
             }
             multiline
             numberOfLines={4}
+            placeholderTextColor="#999"
           />
 
           {/* Terms */}
@@ -501,7 +509,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     ...Platform.select({
       ios: {
-        shadowColor: "#000",
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,

@@ -1,13 +1,10 @@
-import { firestore } from "@/backend/firebase";
 import { Colors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { router, Stack } from "expo-router";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { Link, router, Stack } from "expo-router";
 import React, { useState } from "react";
 import {
   Image,
-  Linking,
   ScrollView,
   StyleSheet,
   Text,
@@ -24,47 +21,41 @@ const CoachingScreen = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const levels = [
-    "Débutante – Je n'ai jamais fait de lash extensions",
+    "Débutante – Je n’ai jamais fait de pose  d’extensions",
     "Intermédiaire – Je pratique déjà mais je veux progresser",
     "Avancée – Je suis lash artist confirmée, je veux créer ma marque ou former",
     "Autre",
   ];
 
   const handleContinue = async () => {
-    if (!selectedLevel || (selectedLevel === "Autre" && !otherLevel)) {
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      // 1. Save to Firebase
-      const docRef = await addDoc(collection(firestore, "coachingRequests"), {
-        level: selectedLevel === "Autre" ? otherLevel : selectedLevel,
-        createdAt: serverTimestamp(),
-        status: "new",
-      });
-
-      console.log("Document written with ID: ", docRef.id);
-
-      // 2. Redirect to WhatsApp
-      const whatsappMessage = `Bonjour Uzuri ! Je suis intéressée par vos formations. Mon niveau: ${
-        selectedLevel === "Autre" ? otherLevel : selectedLevel
-      }. Envoyé depuis l'application Uzuri`;
-      const whatsappUrl = `https://wa.me/12033900003?text=${encodeURIComponent(
-        whatsappMessage
-      )}`;
-
-      await Linking.openURL(whatsappUrl);
-
-      // 3. Go to next step (optional)
-      setCurrentStep(2);
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Une erreur est survenue. Veuillez réessayer.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    // if (!selectedLevel || (selectedLevel === "Autre" && !otherLevel)) {
+    //   return;
+    // }
+    // setIsSubmitting(true);
+    // try {
+    //   // 1. Save to Firebase
+    //   const docRef = await addDoc(collection(firestore, "coachingRequests"), {
+    //     level: selectedLevel === "Autre" ? otherLevel : selectedLevel,
+    //     createdAt: serverTimestamp(),
+    //     status: "new",
+    //   });
+    //   console.log("Document written with ID: ", docRef.id);
+    //   // 2. Redirect to WhatsApp
+    //   const whatsappMessage = `Bonjour Uzuri ! Je suis intéressée par vos formations. Mon niveau: ${
+    //     selectedLevel === "Autre" ? otherLevel : selectedLevel
+    //   }. Envoyé depuis l'application Uzuri`;
+    //   const whatsappUrl = `https://wa.me/12033900003?text=${encodeURIComponent(
+    //     whatsappMessage
+    //   )}`;
+    //   await Linking.openURL(whatsappUrl);
+    //   // 3. Go to next step (optional)
+    //   setCurrentStep(2);
+    // } catch (error) {
+    //   console.error("Error:", error);
+    //   alert("Une erreur est survenue. Veuillez réessayer.");
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
   };
   return (
     <>
@@ -188,19 +179,21 @@ const CoachingScreen = () => {
 
           <TouchableOpacity
             style={[styles.nextButton, isSubmitting && styles.disabledButton]}
-            onPress={handleContinue}
+            // onPress={handleContinue}
             disabled={
               isSubmitting ||
               !selectedLevel ||
               (selectedLevel === "Autre" && !otherLevel)
             }
           >
-            <Text style={styles.nextButtonText}>
-              {isSubmitting ? "Envoi en cours..." : "Continuer"}
-            </Text>
-            {!isSubmitting && (
+            <Link href={"/Modules"} asChild>
+              <Text style={styles.nextButtonText}>
+                {isSubmitting ? "Envoi en cours..." : "Continuer"}
+              </Text>
+              {/* {!isSubmitting && (
               <Ionicons name="arrow-forward" size={20} color="#FFF" />
-            )}
+            )} */}
+            </Link>
           </TouchableOpacity>
         </View>
 
@@ -208,11 +201,11 @@ const CoachingScreen = () => {
         <View style={styles.coursePreview}>
           <Image
             source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/uzuri-de01c.firebasestorage.app/o/uzp.jpg?alt=media&token=605937c1-9cde-491d-9c00-7dd0644a341e",
+              uri: "https://firebasestorage.googleapis.com/v0/b/uzuri-de01c.firebasestorage.app/o/aca.jpg?alt=media&token=54eb40bc-ed62-452a-8457-30fb96201b2c",
             }}
             style={styles.courseImage}
           />
-          <Text style={styles.coursePreviewText}>
+          {/* <Text style={styles.coursePreviewText}>
             Nos formations incluent comment:
           </Text>
           <View style={styles.benefitsContainer}>
@@ -246,7 +239,7 @@ const CoachingScreen = () => {
                 Lancer et gérer une activité de formation rentable
               </Text>
             </View>
-          </View>
+          </View> */}
         </View>
       </ScrollView>
     </>
@@ -392,7 +385,7 @@ const styles = StyleSheet.create({
   },
   courseImage: {
     width: "100%",
-    height: 200,
+    height: 400,
     resizeMode: "cover",
   },
   coursePreviewText: {

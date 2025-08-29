@@ -5,7 +5,7 @@ import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 
 import SocialLoginButton from "@/components/SocialLoginButton";
-import { StatusBar } from "expo-status-bar";
+
 import Animated, { FadeInRight } from "react-native-reanimated";
 
 type Props = {};
@@ -14,7 +14,7 @@ const WelcomeScreen = (props: Props) => {
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
-      <StatusBar style="light" backgroundColor={Colors.primary} />
+
       <ImageBackground
         source={require("@/assets/images/welcomImg.png")}
         style={{ flex: 1 }}

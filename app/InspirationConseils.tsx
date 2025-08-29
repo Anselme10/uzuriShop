@@ -1,5 +1,6 @@
 import { firestore } from "@/backend/firebase";
 import { ensureArray } from "@/components/utils/arrayHelpers";
+import { Colors } from "@/constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
@@ -15,31 +16,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Animated, {
-  FadeInLeft,
-  FadeInRight,
-  FadeInUp,
-} from "react-native-reanimated";
+import Animated, { FadeInLeft, FadeInRight } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-// Asset URLs (replace with your actual hosted images)
-// const ASSETS = {
-//   MOODBOARD_1:
-//     "https://images.unsplash.com/photo-1587506203809-93913996383d?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//   MOODBOARD_2:
-//     "https://images.pexels.com/photos/5128230/pexels-photo-5128230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-//   SUCCESS_STORY:
-//     "https://images.pexels.com/photos/17244592/pexels-photo-17244592/free-photo-of-a-woman-leaning-against-a-brick-wall-wearing-blue-pants.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-//   BEFORE_IMAGE:
-//     "https://images.pexels.com/photos/5128230/pexels-photo-5128230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-//   AFTER_IMAGE:
-//     "https://images.pexels.com/photos/5128273/pexels-photo-5128273.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-//   PRO_TIP_ILLUSTRATION: "https://i.imgur.com/9QZ7Z3C.png",
-//   BRANDING_ICON: "https://i.imgur.com/4jQZ7Z3.png",
-//   PRODUCTION_ICON: "https://i.imgur.com/5T4jV7Y.png",
-//   VIDEO_ICON: "https://i.imgur.com/7WXW3bN.png",
-//   INSPIRATION_HEADER: "https://i.imgur.com/J5qYz7E.jpg",
-// };
 
 interface Moodboard {
   id: string;
@@ -73,13 +51,13 @@ interface ProTip {
 
 // Icons
 const Icons = {
-  play: "▶️",
-  luxury: "💎",
-  girly: "🌸",
-  branding: "🏷️",
-  production: "🛠️",
-  video: "🎥",
-  quote: "❝",
+  play: "▶", // Version plus épurée sans emoji
+  luxury: "💫", // Étoile qui brille (plus moderne que le diamant)
+  girly: "💖", // Cœur moderne et universel
+  branding: "🏷", // Étiquette sans le cadre de l'emoji
+  production: "⚙", // Engrenage minimaliste
+  video: "🎬", // Clap de cinéma (plus spécifique)
+  quote: "〝", // Guillemet plus stylisé
 };
 
 const FADE_IN_DURATION = 800;
@@ -188,7 +166,7 @@ const InspirationConseils = () => {
               id: doc.id,
               title: doc.data().title,
               category: doc.data().category,
-              color: doc.data().color,
+              color: Colors.primary,
               content: doc.data().content,
               isVideo: doc.data().isVideo,
               icon: doc.data().icon,
@@ -301,14 +279,16 @@ const InspirationConseils = () => {
           {item.images?.map((image: any, index: any) => (
             <Image
               key={index}
-              source={{ uri: image }}
+              source={{
+                uri: `https://firebasestorage.googleapis.com/v0/b/uzuri-de01c.firebasestorage.app/o/${encodeURIComponent(
+                  image
+                )}?alt=media`,
+              }}
               style={styles.moodboardImage}
             />
           ))}
         </View>
-        <Text style={styles.moodboardDetails}>
-          {item.details || "Idées de logo • Packaging • Couleurs • Ambiances"}
-        </Text>
+        <Text style={styles.moodboardDetails}>{item.details || ""}</Text>
       </Card>
     </TouchableOpacity>
   );
@@ -435,7 +415,7 @@ const InspirationConseils = () => {
         </View>
 
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
+          {/* <View style={styles.sectionHeader}>
             <Animated.Text
               style={styles.sectionTitle}
               entering={FadeInUp.delay(1000).duration(800).springify()}
@@ -445,7 +425,7 @@ const InspirationConseils = () => {
             <Text style={styles.sectionSubtitle}>
               Galeries d&apos;inspirations classées par styles
             </Text>
-          </View>
+          </View> */}
           {moodboards.length > 0 ? (
             <FlatList
               horizontal
@@ -460,7 +440,7 @@ const InspirationConseils = () => {
           )}
         </View>
 
-        <View style={styles.section}>
+        {/* <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Success Stories</Text>
             <Text style={styles.sectionSubtitle}>
@@ -481,7 +461,7 @@ const InspirationConseils = () => {
               Aucune success story disponible
             </Text>
           )}
-        </View>
+        </View> */}
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
@@ -758,7 +738,7 @@ const styles = StyleSheet.create({
   playButton: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#C9B6E4",
+    backgroundColor: Colors.primary,
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,

@@ -91,7 +91,11 @@ const ProductItem = ({ item, index = 0 }: ProductItemProps) => {
         >
           <View style={styles.imageContainer}>
             <Image
-              source={{ uri: item.images[0] }}
+              source={{
+                uri: `https://firebasestorage.googleapis.com/v0/b/uzuri-de01c.firebasestorage.app/o/${encodeURIComponent(
+                  item.images[0]
+                )}?alt=media`,
+              }}
               style={styles.productImage}
             />
             <TouchableOpacity
@@ -159,7 +163,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#000",
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 2,

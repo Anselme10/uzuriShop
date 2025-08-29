@@ -8,7 +8,6 @@ import {
   View,
 } from "react-native";
 
-import Categories from "@/components/Categories";
 import ProductList from "@/components/ProductList";
 import { Colors } from "@/constants/Colors";
 
@@ -74,11 +73,11 @@ const EcommeScreen = () => {
   return (
     <>
       <ScrollView style={styles.container}>
-        <Categories
+        {/* <Categories
           categories={categories}
           selectedCategory={selectedCategory}
           onCategorySelect={setSelectedCategory}
-        />
+        /> */}
 
         <View style={styles.bannerContainer}>
           <Image
@@ -89,7 +88,7 @@ const EcommeScreen = () => {
           />
         </View>
 
-        <ProductList products={filteredProducts} />
+        <ProductList products={products} />
       </ScrollView>
     </>
   );
@@ -103,6 +102,7 @@ const styles = StyleSheet.create({
   bannerContainer: {
     marginHorizontal: 20,
     marginBottom: 20,
+    marginTop: 20,
   },
   bannerImage: {
     width: "100%",

@@ -14,8 +14,6 @@ import { Colors } from "@/constants/Colors";
 
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 
-import { StatusBar } from "expo-status-bar";
-
 const Ambassador = () => {
   const goToDistributor = () => {
     router.push("/Distributeur");
@@ -29,7 +27,6 @@ const Ambassador = () => {
       contentContainerStyle={styles.container}
       keyboardShouldPersistTaps="handled"
     >
-      <StatusBar style="light" backgroundColor={Colors.primary} />
       <Image
         style={{ width: 150, height: 100, marginHorizontal: 20 }}
         source={require("@/assets/images/uzlogotrans.png")}
@@ -85,7 +82,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     marginBottom: 20,
     width: "100%",
-    shadowColor: "#000",
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
     shadowOpacity: 0.1,
     shadowRadius: 6,
     shadowOffset: { width: 0, height: 3 },
